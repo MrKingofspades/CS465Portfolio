@@ -5,7 +5,7 @@ const db = mongoose.connection
 
 // avoid 'current Server Discovery and Monitoring engine is deprecated'
 // mongoose.set('useUnifiedTopology', true);
-
+/*
 const connect = () => {
     setTimeout(() => mongoose.connect(dbURI, {
         useNewUrlParser: true,
@@ -13,6 +13,11 @@ const connect = () => {
         useUnifiedTopology: true,
     }), 1000);
 }
+*/
+// Test connection
+mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true});
+const connect = mongoose.connection;
+
 
 db.on('connected', () => {
   console.log(`Mongoose connected to ${dbURI}`);
@@ -51,4 +56,4 @@ process.on('SIGTERM', () => {
 });
 
 // Bring in the mongoose schema
-require('./travlr');
+require('./models/travlr');
