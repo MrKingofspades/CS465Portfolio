@@ -25,20 +25,20 @@ const tripsList = async (req, res) => {
 // GET: /trips:/tripCode - returns single trip
 const tripsFindCode = async (req, res) => {
     Model
-        .find({"code": req.params.tripCode })
-        .exec((err, trip) => {
+        .find({'code': req.params.tripCode})
+        .exec ((err, trip) => {
             if (!trip) {
                 return res
-                        .status(404)
-                        .json({ "message": "trip not found" });
+                    .status(404)
+                    .json({'message' : 'trip not found'});
             } else if (err) {
                 return res
-                        .status(404)
-                        .json(err);
+                    .status(404)
+                    .json(err);
             } else {
                 return res
-                        .status(200)
-                        .json(trip);
+                    .status(200)
+                    .json(trip);
             }
         });
 };

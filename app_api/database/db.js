@@ -16,8 +16,6 @@ const connect = () => {
 */
 // Test connection
 mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true});
-const connect = mongoose.connection;
-
 
 db.on('connected', () => {
   console.log(`Mongoose connected to ${dbURI}`);
