@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 // import { trips } from '../data/trips';
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-trip-listing',
@@ -10,23 +11,23 @@ import { Trip } from '../models/trip';
   styleUrls: ['./trip-listing.component.css'],
   providers: [TripDataService]
 })
-
 export class TripListingComponent implements OnInit {
-  
-  // trips: Array<any> = trips;
+
+  //trips: Array<any> = trips;
   trips: Trip[];
 
   message: string;
 
   constructor(
     private tripDataService: TripDataService,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
+
     ) { }
 
-  private addTrip(): void {
-    console.log('Inside TripListingComponent#addTrip');
-    this.router.navigate(['add-trip']);
-  }
+    private addTrip(): void {
+      this.router.navigate(['add-trip']);
+    }
 
   private getTrips(): void {
     console.log('Inside TripListingComponent#getTrips');
@@ -34,12 +35,16 @@ export class TripListingComponent implements OnInit {
     this.tripDataService
       .getTrips()
         .then(foundTrips => {
-          this.message = foundTrips.length > 0 ? '': 'No trips found';
+          this.message = foundTrips.length > 0 ? '' : 'No trips found';
           this.trips = foundTrips;
         });
   }
 
   ngOnInit(): void {
     this.getTrips();
+  }
+
+  public isLoggedIn() : boolean {
+    return this.authenticationService.isLoggedIn();
   }
 }
