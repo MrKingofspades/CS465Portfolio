@@ -25,8 +25,7 @@ export class AuthenticationService {
 
   public login(user: User) : Promise<any> {
     return this.tripDataService.login(user)
-      .then((authResp: AuthResponse ) =>
-    this.saveToken(authResp.token));
+      .then((authResp: AuthResponse ) => this.saveToken(authResp.token));
   }
 
   public register(user: User) : Promise<any> {
